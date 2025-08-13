@@ -1,0 +1,100 @@
+İSTEK: Kategori seçmeli, her yenilemede yeni bilgi gösteren, mobil uyumlu genel kültür sitesi
+
+Genel
+
+Türkçe arayüzlü, statik (yalnızca HTML/CSS/JS) çalışan, “Genel Kültür” odaklı tek sayfalık bir web sitesi üret. Kullanıcı bir kategori seçebilmeli ve sayfa her yenilendiğinde ya da “Yenile” butonuna basıldığında seçili kategoriye ait rastgele yeni bir bilgi (genel kültür notu) görmeli.
+
+Kategoriler
+	•	Genel
+	•	Sanat
+	•	Spor
+	•	Siyaset
+	•	Tarih
+
+Davranış Kuralları
+	1.	Varsayılan kategori Genel olsun ve sayfa ilk yüklendiğinde bu kategoriden bir bilgi göster.
+	2.	Kategori sekmeleri/menüsü ile kategori değiştirildiğinde, o kategoriden rastgele bir bilgi üret/göster.
+	3.	“Yenile” butonuna basıldığında o kategoride daha önce o oturumda gösterilmemiş bir bilgi sun.
+	•	Bir kategorideki tüm bilgiler tüketilince, tekrar başa dön ve karışık sırada yeniden göster (ör. set/queue mantığı).
+	4.	Sayfa yenilendiğinde (browser refresh) de yeni bir bilgi gelsin.
+	5.	Bilgi kartında: başlık (kategori adı), bilgi metni, opsiyonel kaynak bağlantısı alanı olsun.
+	6.	Hızlı tıklamalarda aynı bilginin art arda gelmesini engelle (son gösterilen ID’yi kontrol et).
+	7.	Hata durumunda (ör. veri yüklenemediyse) kullanıcıya anlaşılır bir uyarı göster ve “Tekrar Dene” seçeneği sun.
+
+Veri
+	•	Back-end gerektirme: Hayır. Veriler, her kategori için yerel bir JavaScript dizisi/JSON içinde tutulabilir.
+	•	Örnek veri (en az 10 bilgi/kategori) ekle; birkaçında source alanı bulunabilir:
+
+{
+  "genel": [
+    {"id": 1, "text": "Dünya’nın en büyük okyanusu Pasifik Okyanusu’dur.", "source": "https://…"},
+    {"id": 2, "text": "İnsan vücudundaki en güçlü kas kütleye oranla çenedir."}
+  ],
+  "sanat": [
+    {"id": 101, "text": "Rönesans, 14-17. yüzyıllar arasında Avrupa’da gelişti."}
+  ],
+  "spor": [
+    {"id": 201, "text": "Modern Olimpiyat Oyunları 1896’da Atina’da başladı.", "source": "https://…"}
+  ],
+  "siyaset": [
+    {"id": 301, "text": "Birleşmiş Milletler 1945’te kuruldu."}
+  ],
+  "tarih": [
+    {"id": 401, "text": "Yazının bilinen en eski örnekleri Sümerlere aittir."}
+  ]
+}
+
+Arayüz
+	•	Üstte logo/metin: “Genel Kültür”
+	•	Kategori seçici: sekmeler veya açılır menü (mobilde açılır menü tercih).
+	•	Ana içerik alanında “bilgi kartı”.
+	•	Altında iki buton: Yenile ve Başka Kategori Seç (ikincisi sadece menüyü açar).
+	•	Basit, temiz, modern tipografi.
+
+Mobil & Erişilebilirlik
+	•	Mobile-first tasarım; 360px genişlikte sorunsuz.
+	•	Duyarlı grid/stack (CSS flex veya grid).
+	•	Yüksek kontrast, yeterli satır aralığı.
+	•	Butonlar en az 44x44px dokunma alanı.
+	•	Klavye ile tamamen gezilebilir.
+	•	ARIA etiketleri: kategori menüsü için role="tablist"/tab, bilgi kartı için başlık aria-live="polite" (içerik değişince duyur).
+
+Stil
+	•	Sade, sistem fontu (ör. -apple-system, Segoe UI, Roboto).
+	•	Işık/Koyu mod: prefers-color-scheme destekle.
+	•	Hover/focus durumları belirgin.
+
+Mantık (JS)
+	•	Kategoriler ve içerikler tek bir modülde.
+	•	Oturum bazlı tekrar engellemek için sessionStorage veya RAM’de set tut.
+	•	Rastgele seçim: Fisher–Yates karıştırma veya ID havuzundan örnekleme.
+	•	Son gösterilen ID’yi kategori bazında sakla, peş peşe tekrar etme.
+	•	Basit mimari:
+	•	data.js: veri dizileri
+	•	app.js: durum (state), seçim, render
+	•	index.html, styles.css
+
+Performans
+	•	50KB altında CSS/JS hedefi (minify).
+	•	Görseller (varsa) lazy-load.
+
+SEO & Meta
+	•	lang="tr"
+	•	Anlamlı <title> ve meta açıklama.
+	•	Open Graph başlık/açıklama.
+
+Test/Kabul Kriterleri
+	•	Sayfa ilk açıldığında “Genel” kategorisinden bir bilgi görünüyor.
+	•	Kategori değiştirince ilgili kategoriden bilgi geliyor.
+	•	“Yenile” aynı bilgiyi art arda getirmiyor.
+	•	Tüm bilgiler tüketilince kategori yeniden karıştırılıp devam ediyor.
+	•	Mobilde yatay kayma yok, butonlar dokunulabilir boyutta.
+	•	Klavye ile kategori değiştirilebiliyor, odak halkaları görünüyor.
+	•	Koyu modda metinler okunaklı.
+
+Teslim
+	•	Tam çalışan örnek: index.html, styles.css, app.js, data.js.
+	•	Yorum satırlarıyla kısa açıklamalar.
+	•	Ekstra: Basit bir “Paylaş” butonu (Web Share API destekliyse) opsiyonel.
+
+⸻

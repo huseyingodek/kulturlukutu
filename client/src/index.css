@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(210 25% 7.8431%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(210 25% 7.8431%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(210 25% 7.8431%);
+  --primary: hsl(207 90% 54%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(45 100% 51%);
+  --secondary-foreground: hsl(210 25% 7.8431%);
+  --muted: hsl(0 0% 96%);
+  --muted-foreground: hsl(0 0% 46%);
+  --accent: hsl(122 39% 49%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(0 0% 90%);
+  --input: hsl(0 0% 96%);
+  --ring: hsl(207 90% 54%);
+  --text-primary: hsl(210 25% 13%);
+  --text-secondary: hsl(0 0% 46%);
+  --chart-1: hsl(207 90% 54%);
+  --chart-2: hsl(122 39% 49%);
+  --chart-3: hsl(45 100% 51%);
+  --chart-4: hsl(147.1429 78.5047% 41.9608%);
+  --chart-5: hsl(341.4894 75.2000% 50.9804%);
+  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --radius: 0.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: hsl(210 11% 7%);
+    --foreground: hsl(0 0% 100%);
+    --card: hsl(210 11% 12%);
+    --card-foreground: hsl(0 0% 100%);
+    --popover: hsl(210 11% 7%);
+    --popover-foreground: hsl(0 0% 100%);
+    --primary: hsl(207 90% 54%);
+    --primary-foreground: hsl(0 0% 100%);
+    --secondary: hsl(45 100% 51%);
+    --secondary-foreground: hsl(210 25% 7.8431%);
+    --muted: hsl(210 11% 15%);
+    --muted-foreground: hsl(0 0% 69%);
+    --accent: hsl(122 39% 49%);
+    --accent-foreground: hsl(0 0% 100%);
+    --destructive: hsl(0 63% 31%);
+    --destructive-foreground: hsl(0 0% 100%);
+    --border: hsl(210 11% 15%);
+    --input: hsl(210 11% 18%);
+    --ring: hsl(207 90% 54%);
+    --text-primary: hsl(0 0% 100%);
+    --text-secondary: hsl(0 0% 69%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-system);
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { 
+      opacity: 0; 
+      transform: translateY(10px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+  
+  .tab-active {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+  
+  .tab-inactive {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .focus-ring:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+  
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .dropdown-item:hover {
+    background-color: hsl(var(--muted));
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .dropdown-item:hover {
+      background-color: hsl(210 11% 20%);
+    }
+  }
+}

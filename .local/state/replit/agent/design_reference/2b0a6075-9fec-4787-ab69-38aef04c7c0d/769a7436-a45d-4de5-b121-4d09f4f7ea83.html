@@ -1,0 +1,1005 @@
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genel Kültür - Bilgi Keşfet</title>
+    <meta
+      name="description"
+      content="Genel kültür bilgilerinizi artırın. Sanat, spor, siyaset, tarih ve daha fazlasında ilginç bilgiler keşfedin."
+    />
+    <meta property="og:title" content="Genel Kültür - Bilgi Keşfet" />
+    <meta
+      property="og:description"
+      content="Günlük genel kültür bilgileri ile kendinizi geliştirin"
+    />
+    <meta property="og:type" content="website" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1976D2",
+              secondary: "#FFC107",
+              accent: "#4CAF50",
+              "text-primary": "#212121",
+              "text-secondary": "#757575",
+            },
+            fontFamily: {
+              system: [
+                "-apple-system",
+                "BlinkMacSystemFont",
+                "Segoe UI",
+                "Roboto",
+                "sans-serif",
+              ],
+            },
+          },
+        },
+        darkMode: "media",
+      };
+    </script>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .dark-mode-bg {
+          background-color: #121212;
+        }
+        .dark-mode-card {
+          background-color: #1e1e1e;
+        }
+        .dark-mode-text {
+          color: #ffffff;
+        }
+        .dark-mode-text-secondary {
+          color: #b0b0b0;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .tab-active {
+        background-color: #1976d2;
+        color: white;
+      }
+
+      .tab-inactive {
+        background-color: #f5f5f5;
+        color: #757575;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .tab-inactive {
+          background-color: #2d2d2d;
+          color: #b0b0b0;
+        }
+      }
+
+      .focus-ring:focus {
+        outline: 2px solid #1976d2;
+        outline-offset: 2px;
+      }
+
+      .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+      }
+    </style>
+  </head>
+  <body
+    class="font-system bg-gray-50 dark-mode-bg text-text-primary dark-mode-text min-h-screen"
+  >
+    <div class="container mx-auto px-4 py-6 max-w-4xl">
+      <!-- Header -->
+      <header class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-primary mb-2">Genel Kültür</h1>
+        <p class="text-text-secondary dark-mode-text-secondary">
+          Her gün yeni bilgiler keşfedin
+        </p>
+      </header>
+
+      <!-- Category Navigation -->
+      <nav class="mb-6" role="tablist" aria-label="Kategori seçimi">
+        <!-- Desktop Tabs -->
+        <div class="hidden md:flex flex-wrap justify-center gap-2 mb-4">
+          <button
+            class="tab-button touch-target px-4 py-2 rounded-lg font-medium transition-colors focus-ring tab-active"
+            data-category="genel"
+            role="tab"
+            aria-selected="true"
+            aria-controls="fact-card"
+          >
+            Genel
+          </button>
+          <button
+            class="tab-button touch-target px-4 py-2 rounded-lg font-medium transition-colors focus-ring tab-inactive"
+            data-category="sanat"
+            role="tab"
+            aria-selected="false"
+            aria-controls="fact-card"
+          >
+            Sanat
+          </button>
+          <button
+            class="tab-button touch-target px-4 py-2 rounded-lg font-medium transition-colors focus-ring tab-inactive"
+            data-category="spor"
+            role="tab"
+            aria-selected="false"
+            aria-controls="fact-card"
+          >
+            Spor
+          </button>
+          <button
+            class="tab-button touch-target px-4 py-2 rounded-lg font-medium transition-colors focus-ring tab-inactive"
+            data-category="siyaset"
+            role="tab"
+            aria-selected="false"
+            aria-controls="fact-card"
+          >
+            Siyaset
+          </button>
+          <button
+            class="tab-button touch-target px-4 py-2 rounded-lg font-medium transition-colors focus-ring tab-inactive"
+            data-category="tarih"
+            role="tab"
+            aria-selected="false"
+            aria-controls="fact-card"
+          >
+            Tarih
+          </button>
+          <button
+            class="tab-button touch-target px-4 py-2 rounded-lg font-medium transition-colors focus-ring tab-inactive"
+            data-category="bilim"
+            role="tab"
+            aria-selected="false"
+            aria-controls="fact-card"
+          >
+            Bilim
+          </button>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div class="md:hidden relative">
+          <button
+            id="categoryDropdown"
+            class="w-full touch-target px-4 py-3 bg-white dark-mode-card border border-gray-300 dark:border-gray-600 rounded-lg font-medium focus-ring flex justify-between items-center"
+          >
+            <span id="selectedCategory">Genel</span>
+            <svg
+              class="w-5 h-5 transition-transform"
+              id="dropdownIcon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </button>
+          <div
+            id="dropdownMenu"
+            class="hidden absolute top-full left-0 right-0 mt-1 bg-white dark-mode-card border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg z-10"
+          >
+            <button
+              class="dropdown-item w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring"
+              data-category="genel"
+            >
+              Genel
+            </button>
+            <button
+              class="dropdown-item w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring"
+              data-category="sanat"
+            >
+              Sanat
+            </button>
+            <button
+              class="dropdown-item w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring"
+              data-category="spor"
+            >
+              Spor
+            </button>
+            <button
+              class="dropdown-item w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring"
+              data-category="siyaset"
+            >
+              Siyaset
+            </button>
+            <button
+              class="dropdown-item w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring rounded-b-lg"
+              data-category="tarih"
+            >
+              Tarih
+            </button>
+            <button
+              class="dropdown-item w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring rounded-b-lg"
+              data-category="bilim"
+            >
+              Bilim
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Fact Card -->
+      <main class="mb-6">
+        <div
+          id="fact-card"
+          class="bg-white dark-mode-card rounded-xl shadow-lg p-6 fade-in"
+          role="tabpanel"
+          aria-live="polite"
+        >
+          <div class="flex items-center mb-4">
+            <div class="w-3 h-3 bg-primary rounded-full mr-3"></div>
+            <h2 id="fact-category" class="text-lg font-semibold text-primary">
+              Genel
+            </h2>
+          </div>
+          <p id="fact-text" class="text-base leading-relaxed mb-4">
+            <!-- İlk bilgi buraya yüklenecek -->
+          </p>
+          <div id="fact-source" class="hidden">
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-primary hover:underline focus-ring rounded"
+            >
+              🔗 Kaynak
+            </a>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div
+          id="error-state"
+          class="hidden bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-center"
+        >
+          <div class="text-red-600 dark:text-red-400 mb-4">
+            <svg
+              class="w-12 h-12 mx-auto mb-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+              ></path>
+            </svg>
+            <h3 class="text-lg font-semibold">Bir hata oluştu</h3>
+            <p class="text-sm">Bilgi yüklenirken sorun yaşandı</p>
+          </div>
+          <button
+            id="retry-button"
+            class="touch-target px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 focus-ring font-medium"
+          >
+            Tekrar Dene
+          </button>
+        </div>
+      </main>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <button
+          id="refresh-button"
+          class="touch-target px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 focus-ring font-medium transition-colors flex items-center justify-center gap-2"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            ></path>
+          </svg>
+          Yeni Bilgi
+        </button>
+        <button
+          id="share-button"
+          class="hidden touch-target px-6 py-3 bg-secondary text-gray-800 rounded-lg hover:bg-yellow-500 focus-ring font-medium transition-colors flex items-center justify-center gap-2"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+            ></path>
+          </svg>
+          Paylaş
+        </button>
+      </div>
+
+      <!-- Footer -->
+      <footer
+        class="text-center mt-12 text-sm text-text-secondary dark-mode-text-secondary"
+      >
+        <p>© 2025 Kültürlükutu. Bilgi sevenlerin buluşma noktası.</p>
+      </footer>
+    </div>
+
+    <script>
+      // Veri deposu - Her kategori için en az 10 bilgi
+      const data = {
+        genel: [
+          {
+            id: 1,
+            text: "Dünya'nın en büyük okyanusu Pasifik Okyanusu'dur ve dünya yüzeyinin yaklaşık üçte birini kaplar.",
+            source: "https://www.noaa.gov",
+          },
+          {
+            id: 2,
+            text: "İnsan vücudundaki en güçlü kas kütleye oranla çene kasıdır.",
+          },
+          {
+            id: 3,
+            text: "Bir yıl 365.25 gün sürer, bu yüzden her 4 yılda bir artık yıl olur.",
+          },
+          {
+            id: 4,
+            text: "Antarktika, dünyada hiçbir ülkeye ait olmayan tek kıtadır.",
+          },
+          { id: 5, text: "İnsan beyni yaklaşık 86 milyar nöron içerir." },
+          {
+            id: 6,
+            text: "Petrol, milyonlarca yıl önce yaşamış bitki ve hayvan kalıntılarından oluşmuştur.",
+          },
+          { id: 7, text: "Dünyada 7000'den fazla dil konuşulmaktadır." },
+          { id: 8, text: "Ekvator'un uzunluğu yaklaşık 40.075 kilometredir." },
+          { id: 9, text: "İnsan DNA'sının %50'si muz DNA'sıyla aynıdır." },
+          {
+            id: 10,
+            text: "Bir günde 24 saat vardır çünkü Dünya kendi ekseni etrafında 24 saatte döner.",
+          },
+          { id: 11, text: "Himalayalar yılda yaklaşık 1 cm yükseliyor." },
+          { id: 12, text: "Oktopusların üç kalbi vardır." },
+          {
+            id: 13,
+            text: "Ay, Dünya'dan her yıl yaklaşık 3.8 cm uzaklaşıyor.",
+          },
+          {
+            id: 14,
+            text: "En uzun ömürlü hayvan Grönland köpekbalığıdır ve 400 yıla kadar yaşayabilir.",
+          },
+          {
+            id: 15,
+            text: "Arılar, dünyanın en önemli tozlayıcı böceklerinden biridir.",
+          },
+          {
+            id: 16,
+            text: "Gözleriniz doğduğunuz andaki boyutunu korur, ancak kulak ve burun büyümeye devam eder.",
+          },
+          {
+            id: 17,
+            text: "Plüton, 2006 yılında gezegen statüsünden çıkarıldı.",
+          },
+          {
+            id: 18,
+            text: "Dünya atmosferi %78 azot, %21 oksijen ve diğer gazlardan oluşur.",
+          },
+          {
+            id: 19,
+            text: "Deniz seviyesinden en yüksek şehir Bolivya'daki El Alto’dur.",
+          },
+          {
+            id: 20,
+            text: "Dünyadaki tüm karıncaların toplam ağırlığı, insan nüfusunun ağırlığını aşabilir.",
+          },
+          {
+            id: 21,
+            text: "En derin okyanus noktası Mariana Çukuru’dur.",
+            source: "https://oceanservice.noaa.gov",
+          },
+          {
+            id: 22,
+            text: "Dünya'nın kendi eksenindeki dönüş hızı ekvatorda saatte yaklaşık 1670 km'dir.",
+          },
+          {
+            id: 23,
+            text: "Balinalar, memeliler arasında en uzun göç eden canlılardandır.",
+          },
+          {
+            id: 24,
+            text: "Dünyada bilinen en eski üniversite Fas’taki el-Karaouine Üniversitesi’dir.",
+            source: "https://unesco.org",
+          },
+          { id: 25, text: "Kutup ayılarının derisi siyahtır." },
+          {
+            id: 26,
+            text: "En hızlı kara hayvanı saatte 112 km hız yapabilen çitadır.",
+          },
+          { id: 27, text: "Avustralya, dünyanın en küçük kıtasıdır." },
+          { id: 28, text: "Bir salyangoz üç yıla kadar uyuyabilir." },
+          {
+            id: 29,
+            text: "Amazon Ormanı, dünyanın oksijeninin %20’sini üretir.",
+          },
+          { id: 30, text: "İnsan kalbi günde yaklaşık 100.000 kez atar." },
+          {
+            id: 31,
+            text: "Dünya üzerindeki en yüksek şelale Venezuela’daki Angel Şelalesi’dir.",
+          },
+          { id: 32, text: "En eski yazılı destan Gılgamış Destanı’dır." },
+          { id: 33, text: "Timsahlar dillerini dışarı çıkaramazlar." },
+          { id: 34, text: "İnsan beyninin %75'i sudur." },
+          {
+            id: 35,
+            text: "Güneş ışığının Dünya’ya ulaşması 8 dakika 20 saniye sürer.",
+          },
+          {
+            id: 36,
+            text: "Everest Dağı, deniz seviyesinden 8.848 metre yüksekliğindedir.",
+          },
+          {
+            id: 37,
+            text: "Dünya’nın en kuru yeri Şili’deki Atacama Çölü’dür.",
+          },
+          {
+            id: 38,
+            text: "Bal arıları, dans ederek birbirlerine bilgi aktarır.",
+          },
+          {
+            id: 39,
+            text: "Ortalama bir insan yaşamı boyunca yaklaşık 100.000 km yürür.",
+          },
+          {
+            id: 40,
+            text: "Tarih boyunca yaklaşık 108 milyar insan yaşamıştır.",
+            source: "https://www.prb.org",
+          },
+        ],
+        sanat: [
+          {
+            id: 101,
+            text: "Rönesans dönemi 14-17. yüzyıllar arasında Avrupa'da gelişti ve sanat tarihine damga vurdu.",
+            source: "https://www.britannica.com",
+          },
+          {
+            id: 102,
+            text: "Leonardo da Vinci'nin Mona Lisa tablosu Louvre Müzesi'nde sergilenmektedir.",
+          },
+          {
+            id: 103,
+            text: "Van Gogh hayatı boyunca sadece bir tablo satabilmiştir.",
+          },
+          {
+            id: 104,
+            text: "Michelangelo'nun Sistine Şapeli tavanını boyaması 4 yıl sürmüştür.",
+          },
+          {
+            id: 105,
+            text: "Pablo Picasso, hayatında 50.000'den fazla sanat eseri üretmiştir.",
+          },
+          {
+            id: 106,
+            text: "Dünyada en çok ziyaret edilen müze Louvre Müzesi'dir.",
+          },
+          {
+            id: 107,
+            text: "Empresyonizm akımı 19. yüzyılda Fransa'da doğmuştur.",
+          },
+          {
+            id: 108,
+            text: "Bauhaus sanat okulu modern tasarımın temellerini atmıştır.",
+          },
+          {
+            id: 109,
+            text: "Salvador Dalí'nin eriyen saatler tablosu Sürrealizm'in simgesi haline gelmiştir.",
+          },
+          { id: 110, text: "Opera sanatı 16. yüzyılda İtalya'da doğmuştur." },
+          {
+            id: 111,
+            text: "Auguste Rodin'in 'Düşünen Adam' heykeli sanat tarihinin en ünlü heykellerindendir.",
+          },
+          {
+            id: 112,
+            text: "Andy Warhol, Pop Art akımının öncülerinden biridir.",
+          },
+          {
+            id: 113,
+            text: "Klasik müzik döneminde Mozart 600’den fazla eser yazdı.",
+          },
+          {
+            id: 114,
+            text: "Rembrandt, ışık ve gölge kullanımındaki ustalığıyla tanınır.",
+          },
+          {
+            id: 115,
+            text: "Michelangelo hem ressam hem heykeltıraş hem de mimardı.",
+          },
+          {
+            id: 116,
+            text: "Modern sanat, 19. yüzyılın sonlarında geleneksel kurallara karşı ortaya çıktı.",
+          },
+          { id: 117, text: "Dadaizm, 1. Dünya Savaşı'na tepki olarak doğdu." },
+          {
+            id: 118,
+            text: "Sanat, tarih boyunca propaganda aracı olarak da kullanıldı.",
+          },
+          {
+            id: 119,
+            text: "Barok dönem, dramatik ve süslü sanat tarzıyla bilinir.",
+          },
+          { id: 120, text: "İlk fotoğraf 1826 yılında çekilmiştir." },
+        ],
+        spor: [
+          {
+            id: 201,
+            text: "Modern Olimpiyat Oyunları 1896'da Atina'da başladı.",
+            source: "https://www.olympic.org",
+          },
+          {
+            id: 202,
+            text: "Futbol, dünyada en çok oynanan ve izlenen spor dalıdır.",
+          },
+          {
+            id: 203,
+            text: "Usain Bolt, 100 metre koşusunda 9.58 saniye ile dünya rekoru sahibidir.",
+          },
+          { id: 204, text: "FIFA Dünya Kupası her 4 yılda bir düzenlenir." },
+          {
+            id: 205,
+            text: "Michael Phelps, 23 olimpiyat altın madalyası ile en başarılı olimpiyatçıdır.",
+          },
+          {
+            id: 206,
+            text: "Tenis tarihinin en uzun maçı Wimbledon 2010'da 11 saat 5 dakika sürdü.",
+          },
+          {
+            id: 207,
+            text: "Basketbol 1891'de James Naismith tarafından icat edildi.",
+          },
+          {
+            id: 208,
+            text: "Formula 1'de en başarılı pilot Michael Schumacher ve Lewis Hamilton'dur.",
+          },
+          { id: 209, text: "Olimpiyat mottosu 'Citius, Altius, Fortius'tur." },
+          { id: 210, text: "Maraton mesafesi 42.195 kilometredir." },
+          { id: 211, text: "Golf topunda 336 çukur bulunur." },
+          { id: 212, text: "Sumo güreşi Japonya'nın milli sporudur." },
+          { id: 213, text: "NBA, 1946 yılında kurulmuştur." },
+          {
+            id: 214,
+            text: "Boks maçları genellikle 3 dakikalık rauntlardan oluşur.",
+          },
+          { id: 215, text: "İlk Dünya Kupası 1930'da Uruguay'da yapıldı." },
+          {
+            id: 216,
+            text: "Voleybol 1895 yılında William G. Morgan tarafından icat edildi.",
+          },
+          {
+            id: 217,
+            text: "Tour de France, dünyanın en ünlü bisiklet yarışı olarak bilinir.",
+          },
+          {
+            id: 218,
+            text: "Kricket, İngiltere ve Hindistan'da çok popülerdir.",
+          },
+          { id: 219, text: "Buz hokeyi Kanada’nın ulusal kış sporudur." },
+          {
+            id: 220,
+            text: "At yarışı, insanlık tarihindeki en eski spor dallarından biridir.",
+          },
+        ],
+        siyaset: [
+          { id: 301, text: "Birleşmiş Milletler 1945'te kuruldu." },
+          {
+            id: 302,
+            text: "Dünyada en uzun süre hüküm süren monarşi İngiltere Kraliyet ailesidir.",
+          },
+          { id: 303, text: "Türkiye Cumhuriyeti 29 Ekim 1923'te ilan edildi." },
+          { id: 304, text: "Avrupa Birliği'nde 27 üye ülke vardır." },
+          { id: 305, text: "NATO 1949'da kuruldu." },
+          { id: 306, text: "Dünyadaki en büyük demokrasi Hindistan'dır." },
+          { id: 307, text: "Berlin Duvarı 1989'da yıkıldı." },
+          { id: 308, text: "Soğuk Savaş 1947-1991 yılları arasında sürdü." },
+          { id: 309, text: "Nelson Mandela 27 yıl hapiste kaldı." },
+          {
+            id: 310,
+            text: "Mahatma Gandhi şiddet kullanmadan bağımsızlık mücadelesi verdi.",
+          },
+          { id: 311, text: "Kadınlar ABD'de 1920'de oy hakkı kazandı." },
+          { id: 312, text: "Magna Carta 1215'te imzalandı." },
+          { id: 313, text: "ABD Anayasası 1787'de kabul edildi." },
+          { id: 314, text: "Çin Halk Cumhuriyeti 1949'da kuruldu." },
+          { id: 315, text: "Fransa’da Beşinci Cumhuriyet 1958’de kuruldu." },
+          { id: 316, text: "BM Güvenlik Konseyi'nin 5 daimi üyesi vardır." },
+          {
+            id: 317,
+            text: "Demokrasi kelimesi Yunanca 'halkın yönetimi' anlamına gelir.",
+          },
+          {
+            id: 318,
+            text: "ABD başkanlık sistemi kuvvetler ayrılığı ilkesine dayanır.",
+          },
+          { id: 319, text: "Avrupa Parlamentosu 705 milletvekilinden oluşur." },
+          {
+            id: 320,
+            text: "İsviçre, tarafsızlığıyla ünlüdür ve 1815'ten beri savaşmamıştır.",
+          },
+        ],
+        tarih: [
+          {
+            id: 401,
+            text: "Yazının bilinen en eski örnekleri Sümerler tarafından geliştirildi.",
+          },
+          {
+            id: 402,
+            text: "Büyük İskender'in imparatorluğu 3 kıtaya yayılmıştı.",
+          },
+          { id: 403, text: "Roma İmparatorluğu MS 476'da sona erdi." },
+          {
+            id: 404,
+            text: "İpek Yolu Çin ile Avrupa arasında ticaret köprüsü kurdu.",
+          },
+          { id: 405, text: "Osmanlı İmparatorluğu 600 yıl sürdü." },
+          { id: 406, text: "Kolomb 1492'de Amerika kıtasını keşfetti." },
+          { id: 407, text: "Fransız Devrimi 1789'da başladı." },
+          {
+            id: 408,
+            text: "İkinci Dünya Savaşı 1939-1945 yılları arasında sürdü.",
+          },
+          {
+            id: 409,
+            text: "Mısır piramitleri yaklaşık 4500 yıl önce inşa edildi.",
+          },
+          { id: 410, text: "Gutenberg 1440'da matbaayı icat etti." },
+          {
+            id: 411,
+            text: "Endüstri Devrimi 18. yüzyılda İngiltere'de başladı.",
+          },
+          { id: 412, text: "Çin Seddi'nin inşası MÖ 7. yüzyılda başladı." },
+          {
+            id: 413,
+            text: "Amerikan İç Savaşı 1861-1865 yılları arasında yaşandı.",
+          },
+          { id: 414, text: "Truva Savaşı, antik Yunan mitolojisinde ünlüdür." },
+          {
+            id: 415,
+            text: "Napolyon Bonapart 1804'te Fransa İmparatoru oldu.",
+          },
+          { id: 416, text: "Hititler, Anadolu’da önemli bir uygarlık kurdu." },
+          {
+            id: 417,
+            text: "Moğol İmparatorluğu 13. yüzyılda en geniş sınırlara ulaştı.",
+          },
+          { id: 418, text: "Bizans İmparatorluğu 1453’te sona erdi." },
+          { id: 419, text: "Taş Devri, insanlık tarihinin en uzun dönemidir." },
+          {
+            id: 420,
+            text: "Sümerler tekerleği icat eden ilk uygarlık olarak bilinir.",
+          },
+        ],
+      };
+
+      // Uygulama durumu
+      let currentCategory = "genel";
+      let shownFacts = {}; // Kategori bazında gösterilen bilgileri takip et
+      let currentFactId = null;
+
+      // SessionStorage anahtarları
+      const STORAGE_KEY = "genel-kultur-shown-facts";
+
+      // Sayfa yüklendiğinde çalış
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeApp();
+      });
+
+      function initializeApp() {
+        // Oturum verilerini yükle
+        loadSessionData();
+
+        // İlk bilgiyi göster
+        showRandomFact(currentCategory);
+
+        // Event listener'ları kur
+        setupEventListeners();
+
+        // Web Share API desteği kontrolü
+        if (navigator.share) {
+          document.getElementById("share-button").classList.remove("hidden");
+        }
+      }
+
+      function loadSessionData() {
+        try {
+          const stored = sessionStorage.getItem(STORAGE_KEY);
+          if (stored) {
+            shownFacts = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.log("SessionStorage verisi yüklenemedi:", e);
+          shownFacts = {};
+        }
+      }
+
+      function saveSessionData() {
+        try {
+          sessionStorage.setItem(STORAGE_KEY, JSON.stringify(shownFacts));
+        } catch (e) {
+          console.log("SessionStorage verisi kaydedilemedi:", e);
+        }
+      }
+
+      function setupEventListeners() {
+        // Desktop tab butonları
+        const tabButtons = document.querySelectorAll(".tab-button");
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const category = this.dataset.category;
+            switchCategory(category);
+          });
+        });
+
+        // Mobile dropdown
+        const dropdown = document.getElementById("categoryDropdown");
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        const dropdownIcon = document.getElementById("dropdownIcon");
+
+        dropdown.addEventListener("click", function () {
+          const isOpen = !dropdownMenu.classList.contains("hidden");
+          if (isOpen) {
+            dropdownMenu.classList.add("hidden");
+            dropdownIcon.style.transform = "rotate(0deg)";
+          } else {
+            dropdownMenu.classList.remove("hidden");
+            dropdownIcon.style.transform = "rotate(180deg)";
+          }
+        });
+
+        // Dropdown seçenekleri
+        const dropdownItems = document.querySelectorAll(".dropdown-item");
+        dropdownItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            const category = this.dataset.category;
+            switchCategory(category);
+            dropdownMenu.classList.add("hidden");
+            dropdownIcon.style.transform = "rotate(0deg)";
+          });
+        });
+
+        // Dropdown dışına tıklama
+        document.addEventListener("click", function (e) {
+          if (!dropdown.contains(e.target)) {
+            dropdownMenu.classList.add("hidden");
+            dropdownIcon.style.transform = "rotate(0deg)";
+          }
+        });
+
+        // Yenile butonu
+        document
+          .getElementById("refresh-button")
+          .addEventListener("click", function () {
+            showRandomFact(currentCategory);
+          });
+
+        // Tekrar dene butonu
+        document
+          .getElementById("retry-button")
+          .addEventListener("click", function () {
+            hideError();
+            showRandomFact(currentCategory);
+          });
+
+        // Paylaş butonu
+        document
+          .getElementById("share-button")
+          .addEventListener("click", shareCurrentFact);
+
+        // Klavye navegasyonu
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            if (
+              e.target.classList.contains("tab-button") ||
+              e.target.classList.contains("dropdown-item")
+            ) {
+              e.preventDefault();
+              e.target.click();
+            }
+          }
+        });
+      }
+
+      function switchCategory(category) {
+        if (category === currentCategory) return;
+
+        currentCategory = category;
+
+        // Desktop tab durumunu güncelle
+        const tabButtons = document.querySelectorAll(".tab-button");
+        tabButtons.forEach((button) => {
+          if (button.dataset.category === category) {
+            button.classList.remove("tab-inactive");
+            button.classList.add("tab-active");
+            button.setAttribute("aria-selected", "true");
+          } else {
+            button.classList.remove("tab-active");
+            button.classList.add("tab-inactive");
+            button.setAttribute("aria-selected", "false");
+          }
+        });
+
+        // Mobile dropdown seçili öğeyi güncelle
+        const selectedCategory = document.getElementById("selectedCategory");
+        selectedCategory.textContent = getCategoryDisplayName(category);
+
+        // Kategori değiştiğinde yeni bilgi göster
+        showRandomFact(category);
+      }
+
+      function getCategoryDisplayName(category) {
+        const names = {
+          genel: "Genel",
+          sanat: "Sanat",
+          spor: "Spor",
+          siyaset: "Siyaset",
+          tarih: "Tarih",
+          bilim: "Bilim",
+        };
+        return names[category] || category;
+      }
+
+      function showRandomFact(category) {
+        try {
+          const facts = data[category];
+          if (!facts || facts.length === 0) {
+            showError();
+            return;
+          }
+
+          // Kategoriye ait gösterilen bilgileri al
+          if (!shownFacts[category]) {
+            shownFacts[category] = [];
+          }
+
+          const shown = shownFacts[category];
+
+          // Tüm bilgiler gösterildiyse sıfırla (Fisher-Yates shuffle)
+          if (shown.length >= facts.length) {
+            shownFacts[category] = [];
+            shown.length = 0;
+          }
+
+          // Gösterilmemiş bilgileri bul
+          const availableFacts = facts.filter(
+            (fact) => !shown.includes(fact.id) && fact.id !== currentFactId
+          );
+
+          // Eğer hiç gösterilmemiş bilgi yoksa (son bilgi hariç), listesi sıfırla
+          if (availableFacts.length === 0) {
+            shownFacts[category] = currentFactId ? [currentFactId] : [];
+            const filteredFacts = facts.filter(
+              (fact) => fact.id !== currentFactId
+            );
+            if (filteredFacts.length > 0) {
+              showFact(
+                filteredFacts[Math.floor(Math.random() * filteredFacts.length)],
+                category
+              );
+            } else {
+              showFact(
+                facts[Math.floor(Math.random() * facts.length)],
+                category
+              );
+            }
+            return;
+          }
+
+          // Rastgele bilgi seç
+          const randomFact =
+            availableFacts[Math.floor(Math.random() * availableFacts.length)];
+          showFact(randomFact, category);
+        } catch (error) {
+          console.error("Bilgi gösterme hatası:", error);
+          showError();
+        }
+      }
+
+      function showFact(fact, category) {
+        // Bilgiyi gösterilenlere ekle
+        if (!shownFacts[category]) {
+          shownFacts[category] = [];
+        }
+        shownFacts[category].push(fact.id);
+        currentFactId = fact.id;
+
+        // SessionStorage'a kaydet
+        saveSessionData();
+
+        // UI'yi güncelle
+        document.getElementById("fact-category").textContent =
+          getCategoryDisplayName(category);
+        document.getElementById("fact-text").textContent = fact.text;
+
+        // Kaynak linkini göster/gizle
+        const sourceElement = document.getElementById("fact-source");
+        if (fact.source) {
+          sourceElement.querySelector("a").href = fact.source;
+          sourceElement.classList.remove("hidden");
+        } else {
+          sourceElement.classList.add("hidden");
+        }
+
+        // Kartı yeniden canlandır
+        const card = document.getElementById("fact-card");
+        card.classList.remove("fade-in");
+        card.offsetHeight; // Force reflow
+        card.classList.add("fade-in");
+
+        // Hata durumunu gizle
+        hideError();
+      }
+
+      function showError() {
+        document.getElementById("fact-card").classList.add("hidden");
+        document.getElementById("error-state").classList.remove("hidden");
+      }
+
+      function hideError() {
+        document.getElementById("fact-card").classList.remove("hidden");
+        document.getElementById("error-state").classList.add("hidden");
+      }
+
+      async function shareCurrentFact() {
+        if (!navigator.share) return;
+
+        const factText = document.getElementById("fact-text").textContent;
+        const category = document.getElementById("fact-category").textContent;
+
+        try {
+          await navigator.share({
+            title: "Genel Kültür - İlginç Bilgi",
+            text: `${category}: ${factText}`,
+            url: window.location.href,
+          });
+        } catch (error) {
+          console.log("Paylaşım hatası:", error);
+        }
+      }
+
+      // Sayfa yenilendiğinde yeni bilgi göster (hash kullanarak)
+      let lastHash = window.location.hash;
+      setInterval(function () {
+        if (window.location.hash !== lastHash) {
+          lastHash = window.location.hash;
+          // Hash değişti, sayfanın yenilendiğini varsay
+          showRandomFact(currentCategory);
+        }
+      }, 100);
+
+      // Performance monitoring
+      window.addEventListener("load", function () {
+        const totalSize = JSON.stringify(data).length;
+        console.log(`Veri boyutu: ${Math.round(totalSize / 1024)}KB`);
+      });
+    </script>
+  </body>
+</html>
